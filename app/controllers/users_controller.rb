@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
       shared_tracks = current_user.top100_tracks & user_card_user.top100_tracks
       names_of_shared_tracks = shared_tracks.map{|track| track.name }.uniq
-
+      
       shared_artists = current_user_artist_ids & user_card_user_artist_ids
       names_of_shared_artists = shared_artists.map{|artist_id| Top100Track.find_by(artist_id: artist_id).artist_name}
 
