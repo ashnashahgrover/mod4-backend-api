@@ -12,6 +12,7 @@ class UsersController < ApplicationController
             user = User.create(allow_params)
         else
             user = User.find_by(spotify_id: allow_params["spotify_id"])
+            user.update(allow_params)
             user.user_top100_tracks.destroy_all
         end
         if user.valid?
