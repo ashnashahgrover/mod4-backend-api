@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
     def index
         users= User.all
-        render json: users, include: [:top100_tracks]
+        render json: users
     end
 
     def create
@@ -47,10 +47,16 @@ class UsersController < ApplicationController
 
     end
 
+    def destroy
+      id = params[:id]
+      user = User.find(params[:id])
+      user.destroy
+    end
+
     private
 
     def allow_params()
-        params.require(:user).permit!
+      params.require(:user).permit!
     end
 
     def allow_compare()
