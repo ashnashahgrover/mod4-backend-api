@@ -12,7 +12,6 @@ class UsersController < ApplicationController
             user = User.create(allow_params)
         else
             user = User.find_by(spotify_id: allow_params["spotify_id"])
-            user.update(allow_params)
             user.user_top100_tracks.destroy_all
         end
         if user.valid?
@@ -45,6 +44,11 @@ class UsersController < ApplicationController
         shared_tracks: names_of_shared_tracks,
         shared_albums: names_of_shared_albums}
 
+    end
+
+    def update
+      User.find(params[:id]).update(allow_params)
+      render json: {message: "Update User"}
     end
 
     def destroy
